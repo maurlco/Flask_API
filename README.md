@@ -1,4 +1,8 @@
 
+### BACKEND FLASK API - POC  
+
+Simple POC to kickstart and test the basic functions of our future API.
+
 ### API Workflow (Draft)
 Client => Flutter Ipad App
 Backend => Flask API Server
