@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload and Prediction</title>
+</head>
+<body>
+<h1>Image Upload and Prediction</h1>
+<form id="upload-form" enctype="multipart/form-data">
+    <input type="file" id="image-input" accept="image/*" />
+    <button type="button" id="upload-button">Upload</button>
+</form>
+<p>Predicted Class: <span id="predicted-class"></span></p>
+<p>Predicted Class name: <span id="class-name"></span></p>
+<img id="processed-image" src="" alt="Processed Image" style="max-width: 100%; max-height: 100%;">
+
+<script>
+    const uploadForm = document.getElementById("upload-form");
+    const imageInput = document.getElementById("image-input");
+    const uploadButton = document.getElementById("upload-button");
+    const predictedClassElement = document.getElementById("predicted-class");
+    const classNameElement = document.getElementById("class-name");
+    const processedImageElement = document.getElementById("processed-image");
+
+
+
+    uploadButton.addEventListener("click", () => {
+        if (imageInput.files.length === 0) {
+            alert("Please select an image.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", imageInput.files[0]);
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.predicted_class !== undefined) {
+                        predictedClassElement.textContent = response.predicted_class;
+                        classNameElement.textContent = response.class_name;
+                        processedImageElement.src = response.processed_image_url;
+
+                    }
+                } else {
+                    alert("Error uploading image.");
+                }
+            }
+        };
+
+        xhr.open("POST", "/upload/");
+        xhr.send(formData);
+    });
+</script>
+</body>
+</html>
