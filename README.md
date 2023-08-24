@@ -30,7 +30,6 @@ This POC just validate:
 - We know how to send an image
 
 ### Next step POC
-- Voir comment creer uuid en python (pour client call backend for update)
-
-1. Backend Track model "smth" inference status in numerical values 
-2. Client ask Backend status of model inference in %
+1. Voir comment creer uuid en python (pour client call backend for update)
+2. Backend Track model "smth" inference status in numerical values 
+3. Client ask Backend status of model inference in %
