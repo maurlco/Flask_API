@@ -7,11 +7,11 @@ Simple POC to kickstart and test the basic functions of our future API.
 Client => Flutter Ipad App
 Backend => Flask API Server
 
-1- Client send a portrait picture to Backend
-2- Backend process image and classify face (rounded, squared,...)
-3- Backend Generate Hair style
-4- Backend concat Hair style + Portrait picture received
-5- Backend send the resulting 3D model to client
+1- Client send a portrait picture to Backend  
+2- Backend process image and classify face (rounded, squared,...)  
+3- Backend Generate Hair style  
+4- Backend concat Hair style + Portrait picture received  
+5- Backend send the resulting 3D model to client  
 
 _if client want to modify result_
 1. Client send the previously received result + annotations (i.e, drawings) to Backend
