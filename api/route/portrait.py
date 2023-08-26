@@ -3,13 +3,12 @@ import os
 import requests
 import torch
 from PIL import Image
-from dependency_injector.wiring import Provide, inject
+from injector import inject
 from flask import Blueprint
 from flask import request, jsonify, send_from_directory
 from torchvision import transforms, models
 from flask import current_app
 
-from dependency_injection import Services
 from service.classification_manager import ClassificationManager
 
 portrait_api = Blueprint('portrait', __name__,
@@ -19,23 +18,15 @@ MOCKED_PROCESSED_IMAGE_FOLDER = "api/route/static/mock/processed_images"
 
 @portrait_api.route('/')
 def index():
-    print("Bah alors cousiiiiing")
     return portrait_api.send_static_file('index.html')
 
-
-@portrait_api.route('/fausse')
-@inject
-def fausse(manager: ClassificationManager = Provide[Services.classification_manager]):
-    manager.prout()
-    return "Ca marche askip"
-
 @portrait_api.route('/upload/', methods=['POST'])
-def upload_and_predict():
+@inject
+def upload_and_predict(manager: ClassificationManager):
 
     #1. Receive file upload, validate and store in upload folder
     if 'file' not in request.files:
         return jsonify({'error': 'No file part'})
-
     file = request.files['file']
 
     if file.filename == '':
