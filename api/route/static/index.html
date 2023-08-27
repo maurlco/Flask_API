@@ -40,12 +40,9 @@
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
-                    if (response.predicted_class !== undefined) {
-                        predictedClassElement.textContent = response.predicted_class;
-                        classNameElement.textContent = response.class_name;
-                        processedImageElement.src = response.processed_image_url;
-
-                    }
+                    predictedClassElement.textContent = response.predicted_class;
+                    classNameElement.textContent = response.class_name;
+                    processedImageElement.src = '/result_image/' + response.class_name;
                 } else {
                     alert("Error uploading image.");
                 }
